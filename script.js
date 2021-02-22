@@ -54,9 +54,9 @@ function resetGame() {
   secretNumber = createSecretNumber();
 
   displayContent('.score', score);
-  displayContent('.guess', '');
   displayContent('.number', '?');
 
+  document.querySelector('.guess').value = '';
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.message').textContent = 'Start guessing...';
   document.querySelector('body').style.backgroundColor = '#222';
