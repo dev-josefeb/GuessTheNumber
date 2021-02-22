@@ -16,7 +16,7 @@ function checkValue() {
   const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
-    document.querySelector('.message').textContent = '⛔ No Number';
+    displayContent('.message', '⛔ No Number');
     return;
   }
 
@@ -26,9 +26,9 @@ function checkValue() {
 
 function correctGuess() {
   highscore = score > highscore ? score : highscore;
-  document.querySelector('.number').textContent = secretNumber;
-  document.querySelector('.highscore').textContent = highscore;
-  document.querySelector('.message').textContent = '🎉 Correct Number!';
+  displayContent('.number', secretNumber);
+  displayContent('.highscore', highscore);
+  displayContent('.message', '🎉 Correct Number!');
   document.querySelector('body').style.backgroundColor = '#60b347';
   document.querySelector('.number').style.width = '30rem';
 }
@@ -41,21 +41,27 @@ function incorrectGuess(guess, number) {
 
   document.querySelector('.message').textContent =
     guess > number ? `📈 Guess too high!` : '📉 Guess too low!';
-  document.querySelector('.score').textContent = --score;
+  displayContent('.score', --score);
 }
 
 function lostGame() {
-  document.querySelector('.message').textContent = '🧨 You lost the game';
-  document.querySelector('.score').textContent = '0';
+  displayContent('.message', '🧨 You lost the game');
+  displayContent('.score', '0');
 }
 
 function resetGame() {
   score = CONST_START_SCORE;
   secretNumber = createSecretNumber();
-  document.querySelector('.score').textContent = score;
-  document.querySelector('.guess').value = '';
-  document.querySelector('.number').textContent = '?';
+
+  displayContent('.score', score);
+  displayContent('.guess', '');
+  displayContent('.number', '?');
+
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.message').textContent = 'Start guessing...';
   document.querySelector('body').style.backgroundColor = '#222';
+}
+
+function displayContent(className, content) {
+  document.querySelector(className).textContent = content;
 }
